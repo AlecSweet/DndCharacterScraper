@@ -1,5 +1,7 @@
 import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -23,6 +25,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -39,24 +43,24 @@ public class CharacterScraper{
 	public static void main( String[] args ) throws IOException, InterruptedException
     {
 		
-		JFrame f = new JFrame("Data Stealer 1.1  :^)");
+		JFrame f = new JFrame("                                                                                    Literal Malware ʕ •ᴥ•ʔ");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
         f.setVisible(true);
         
         JButton b = new JButton("Submit");    
-		b.setBounds(100,100 + 250,140, 40);
+		b.setBounds(25,100 + 250, 120, 40);
 			
 		JLabel label = new JLabel("Input:");		
-		label.setBounds(10, 10 + 250, 50, 100);
-		
-		JLabel image = new JLabel(new ImageIcon("src/instr.png"));
+		label.setBounds(25, 14 + 250, 50, 100);
+		Image i = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("instr.png"));
+		JLabel image = new JLabel(new ImageIcon(i));
 		image.setBounds(25, 25, 650, 250);
 					
-		JTextField textfield = new JTextField();
+		JTextField textfield = new JTextField("race : num ; p0 : p1 : p2 : p3 : p4 : p5 : p6 ,");
 		textfield.setBounds(60, 50 + 250, 590, 30);
 		
-		error.setBounds(260 ,80 + 250, 300, 60);
+		error.setBounds(155 ,90 + 250, 550, 60);
 						
 		f.add(label);
 		f.add(error);
@@ -85,7 +89,11 @@ public class CharacterScraper{
     	}
     	
     	WebDriverManager.getInstance(CHROME).setup();
-    	WebDriver driver = new ChromeDriver();
+    	ChromeOptions op = new ChromeOptions();
+    	op.addArguments("headless");
+    	op.addArguments("--log-level=3");
+    	WebDriver driver = new ChromeDriver(op);
+ 
     	
     	f.addWindowListener(new WindowAdapter() {
 			  public void windowClosing(WindowEvent we) {
@@ -152,11 +160,11 @@ public class CharacterScraper{
 			        	FileOutputStream excelOutputStream = new FileOutputStream(fileName);
 						wb.write(excelOutputStream);
 						excelOutputStream.close();
+						textfield.setText("race : num ; p0 : p1 : p2 : p3 : p4 : p5 : p6 ,");
+						error.setText("Success: at " + destPath + "\\ResultCharacterSet.xlsx");
 					} catch (IOException e) {
 						error.setText("Error: Excel File Already Open");
-						f.update(f.getGraphics());
 					}			    
-			    	error.setText("Success: at " + destPath + "\\ResultCharacterSet.xlsx");
 			    	f.update(f.getGraphics());
 				}catch(NumberFormatException e) {
 					error.setText("Error: Number Input Error");
